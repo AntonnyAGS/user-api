@@ -4,7 +4,6 @@ import com.projeto.faculdade.ColetaProjetos.model.ClienteModel;
 import com.projeto.faculdade.ColetaProjetos.services.IClienteService;
 import javax.inject.Named;
 
-@Named
 public class ClienteServiceImpl implements IClienteService {
 
 	/*	Podemos criar a interface Repository(que conversa com as classes @Entity)
