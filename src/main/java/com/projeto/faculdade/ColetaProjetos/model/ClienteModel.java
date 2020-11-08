@@ -1,6 +1,8 @@
-package com.projeto.faculdade.ColetaProjetos.usecase.domain.request;
+package com.projeto.faculdade.ColetaProjetos.model;
 
-public class CadastroClienteDomainModelRequest {
+//Aqui criamos as classes que são salvas no banco, as @Entity, e @Table
+
+public class ClienteModel {
 
     private String name;
     private String email;

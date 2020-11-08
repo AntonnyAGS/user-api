@@ -1,16 +1,17 @@
 package com.projeto.faculdade.ColetaProjetos.entrypoint.mapper.request;
 
-import com.projeto.faculdade.ColetaProjetos.entrypoint.model.request.CadastroClienteEntrypointModelRequest;
-import com.projeto.faculdade.ColetaProjetos.usecase.domain.request.CadastroClienteDomainModelRequest;
+import com.projeto.faculdade.ColetaProjetos.api.model.ClienteModelRequest;
+import com.projeto.faculdade.ColetaProjetos.model.ClienteModel;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class CadastroClienteEntrypointMapperRequest {
 
-    public static CadastroClienteDomainModelRequest converter(
-                                    CadastroClienteEntrypointModelRequest cadastroClienteEntrypointModelRequest){
+    public static ClienteModel converter(
+                                    ClienteModelRequest cadastroClienteEntrypointModelRequest){
 
-        CadastroClienteDomainModelRequest cadastroClienteDomainModelRequest = new CadastroClienteDomainModelRequest();
+        ClienteModel cadastroClienteDomainModelRequest = new ClienteModel();
         cadastroClienteDomainModelRequest.setCnpj(cadastroClienteEntrypointModelRequest.getCnpj());
         cadastroClienteDomainModelRequest.setCompanyName(cadastroClienteEntrypointModelRequest.getNomeEmpresa());
         cadastroClienteDomainModelRequest.setCpf(cadastroClienteEntrypointModelRequest.getCpf());

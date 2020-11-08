@@ -1,30 +1,45 @@
-package com.projeto.faculdade.ColetaProjetos.entrypoint.model.request;
+package com.projeto.faculdade.ColetaProjetos.api.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(SnakeCaseStrategy.class)
 @JsonInclude(Include.NON_EMPTY)
-public class CadastroClienteEntrypointModelRequest {
+public class ClienteModelRequest {
 
-    private String nome;
-    private String email;
-    private String senha;
-    private Boolean razaoSocial;
-    private Boolean pessoaFisica;
-    private String cpf;
-    private String cnpj;
-    private String nomeEmpresa;
+	@JsonProperty("nomeCliente")
+    private String nomeCliente = null;
+	
+	@JsonProperty("email")
+    private String email = null;
+	
+	@JsonProperty("senha")
+    private String senha = null;
+	
+	@JsonProperty("razaoSocial")
+    private Boolean razaoSocial = null;
+	
+	@JsonProperty("pessoaFisica")
+    private Boolean pessoaFisica = null;
+	
+	@JsonProperty("cpf")
+    private String cpf = null;
+	
+	@JsonProperty("cnpj")
+    private String cnpj = null;
+	
+	@JsonProperty("nomeEmpresa")
+    private String nomeEmpresa = null;
 
     public String getNome() {
-        return nome;
+        return nomeCliente;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nomeCliente = nome;
     }
 
     public String getEmail() {
