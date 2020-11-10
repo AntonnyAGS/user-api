@@ -1,4 +1,4 @@
-package com.projeto.faculdade.ColetaProjetos.entrypoint.controller.exception.enumerator;
+package com.projeto.faculdade.ColetaProjetos.controller.exception.enumerator;
 
 /**
  * Classe responsável por conter as mensagens de erro
@@ -10,10 +10,9 @@ package com.projeto.faculdade.ColetaProjetos.entrypoint.controller.exception.enu
 public enum ResponseHandlerExceptionEnum {
     ERRO_NA_VALIDACAO_DE_CAMPOS("Erro na validação de campos"),
     VALIDATION_ERROR("validation_error"),
-    RECURSO_INEXISTENTE("Recurso Inexistente"),
+    RECURSO_INVALIDO("Recurso inválido, por favor verifique os dados de entrada"),
     RECURSO_NAO_AUTORIZADO("Transação Não Processada"),
-    ERRO_INESPERADO("Erro Inesperado"),
-    SERVICO_INDISPONIVEL("Serviço Indisponível");
+    ERRO_INESPERADO("Erro Inesperado");
 
     private String textoException;
 

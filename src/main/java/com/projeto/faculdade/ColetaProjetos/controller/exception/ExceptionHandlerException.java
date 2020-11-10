@@ -1,8 +1,8 @@
-package com.projeto.faculdade.ColetaProjetos.entrypoint.controller.exception;
+package com.projeto.faculdade.ColetaProjetos.controller.exception;
 
-import com.projeto.faculdade.ColetaProjetos.entrypoint.controller.exception.enumerator.ResponseHandlerExceptionEnum;
-import com.projeto.faculdade.ColetaProjetos.entrypoint.model.response.CampoMensagemErroModelResponse;
-import com.projeto.faculdade.ColetaProjetos.entrypoint.model.response.MensagemErroModelResponse;
+import com.projeto.faculdade.ColetaProjetos.controller.exception.enumerator.ResponseHandlerExceptionEnum;
+import com.projeto.faculdade.ColetaProjetos.controller.exception.model.response.CampoMensagemErroModelResponse;
+import com.projeto.faculdade.ColetaProjetos.controller.exception.model.response.MensagemErroModelResponse;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.MessageSourceResolvable;
@@ -74,6 +74,43 @@ public class ExceptionHandlerException extends ResponseEntityExceptionHandler im
     public final ResponseEntity<Object> handleAllExceptions(Exception excecao, WebRequest webRequest) {
 
         return this.handleErroInternoException(excecao);
+    }
+
+    /**
+     * Método responsável por tratar excecoes de recursos inválidos, informando 'bad_request'
+     *
+     * @param excecao {@code Exception}
+     * 		- excecao a ser tratada
+     * @param webRequest {@code WebRequest}
+     * 		- requisicao web
+     *
+     * @return {@code ResponseEntity<Object>}
+     * 		- payload de retorno com o código HTTP 400
+     */
+    @ExceptionHandler(ParametroInvalidoException.class)
+    public final ResponseEntity<Object> handleBadRequestExceptions(Exception excecao, WebRequest webRequest) {
+
+        return this.handleBadRequestException(excecao);
+    }
+
+    /**
+     * Método responsável por interceptar e tratar os erros 400 na aplicação.
+     *
+     * @param excecao {@code Exception}
+     * 		- excecao lançada na aplicacao
+     *
+     * @return {@code ResponseEntity<Object>}
+     * 		- entidade com o mapeamento de código e erro para statusCode 400
+     */
+    private ResponseEntity<Object> handleBadRequestException(Exception excecao) {
+
+        this.logException(excecao);
+
+        MensagemErroModelResponse mensagemErroModelResponse = new MensagemErroModelResponse();
+        mensagemErroModelResponse.setCodigo(String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        mensagemErroModelResponse.setMensagem(ResponseHandlerExceptionEnum.RECURSO_INVALIDO.getTextoException());
+
+        return new ResponseEntity<>(mensagemErroModelResponse, HttpStatus.BAD_REQUEST);
     }
 
     /**

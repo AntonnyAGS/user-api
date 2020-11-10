@@ -1,4 +1,6 @@
-package com.projeto.faculdade.ColetaProjetos.entrypoint.model.response;
+package com.projeto.faculdade.ColetaProjetos.controller.exception.model.response;
+
+import com.projeto.faculdade.ColetaProjetos.controller.exception.model.response.CampoMensagemErroModelResponse;
 
 import java.util.List;
 

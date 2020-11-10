@@ -1,4 +1,4 @@
-package com.projeto.faculdade.ColetaProjetos.entrypoint.model.response;
+package com.projeto.faculdade.ColetaProjetos.controller.exception.model.response;
 
 /**
  * Classe responsável por montar
