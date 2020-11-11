@@ -67,7 +67,7 @@ public class CadastraClienteValidator {
 
     private void validaCamposEmpresa(DadosClienteModelRequest dadosClienteModelRequest) {
         if(validaCnpj(dadosClienteModelRequest.getCnpj()).equals(Boolean.FALSE)
-                || dadosClienteModelRequest.getNomeEmpresa().isEmpty() || validaSenha(dadosClienteModelRequest.getSenha())){
+                || dadosClienteModelRequest.getNomeEmpresa().isEmpty()){
             throw new ParametroInvalidoException();
         }
     }
