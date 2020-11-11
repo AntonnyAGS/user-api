@@ -1,18 +1,22 @@
 package com.projeto.faculdade.ColetaProjetos.controller.validation;
 
-import com.projeto.faculdade.ColetaProjetos.controller.exception.ParametroInvalidoException;
-import com.projeto.faculdade.ColetaProjetos.controller.validation.enumerator.TipoClienteEnum;
-import com.projeto.faculdade.ColetaProjetos.model.ClienteModelRequest;
-import com.projeto.faculdade.ColetaProjetos.model.DadosClienteModelRequest;
-import org.springframework.stereotype.Component;
-
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
+
+import com.projeto.faculdade.ColetaProjetos.controller.exception.ParametroInvalidoException;
+import com.projeto.faculdade.ColetaProjetos.controller.validation.enumerator.TipoClienteEnum;
+import com.projeto.faculdade.ColetaProjetos.criptografia.CriptografaDados;
+import com.projeto.faculdade.ColetaProjetos.model.ClienteModelRequest;
+import com.projeto.faculdade.ColetaProjetos.model.DadosClienteModelRequest;
+
 @Component
 public class CadastraClienteValidator {
+	
+	private CriptografaDados crp;
 
     public void validaBodyEntrada(ClienteModelRequest clienteModelRequest) {
         List<DadosClienteModelRequest> dadosClienteModelRequest = clienteModelRequest.getUsuario();
@@ -51,8 +55,12 @@ public class CadastraClienteValidator {
     private void tipoClienteValid(DadosClienteModelRequest dadosClienteModelRequest) {
         if(dadosClienteModelRequest.getTipoCliente().equalsIgnoreCase(TipoClienteEnum.EMPRESA.getTipoCliente())){
             validaCamposEmpresa(dadosClienteModelRequest);
+            String senha = crp.criptografar(dadosClienteModelRequest.getSenha());
+            dadosClienteModelRequest.setSenha(senha);
         } else{
             validaCamposPessoa(dadosClienteModelRequest);
+            String senha = crp.criptografar(dadosClienteModelRequest.getSenha());
+            dadosClienteModelRequest.setSenha(senha);
         }
     }
 
@@ -64,7 +72,7 @@ public class CadastraClienteValidator {
 
     private void validaCamposEmpresa(DadosClienteModelRequest dadosClienteModelRequest) {
         if(validaCnpj(dadosClienteModelRequest.getCnpj()).equals(Boolean.FALSE)
-                || dadosClienteModelRequest.getNomeEmpresa().isBlank()){
+                || dadosClienteModelRequest.getNomeEmpresa().isEmpty()){
             throw new ParametroInvalidoException();
         }
     }
