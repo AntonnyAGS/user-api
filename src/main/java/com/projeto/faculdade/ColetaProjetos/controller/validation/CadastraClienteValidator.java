@@ -9,14 +9,11 @@ import org.springframework.stereotype.Component;
 
 import com.projeto.faculdade.ColetaProjetos.controller.exception.ParametroInvalidoException;
 import com.projeto.faculdade.ColetaProjetos.controller.validation.enumerator.TipoClienteEnum;
-import com.projeto.faculdade.ColetaProjetos.criptografia.CriptografaDados;
 import com.projeto.faculdade.ColetaProjetos.model.ClienteModelRequest;
 import com.projeto.faculdade.ColetaProjetos.model.DadosClienteModelRequest;
 
 @Component
 public class CadastraClienteValidator {
-	
-	private CriptografaDados crp;
 
     public void validaBodyEntrada(ClienteModelRequest clienteModelRequest) {
         List<DadosClienteModelRequest> dadosClienteModelRequest = clienteModelRequest.getUsuario();
@@ -35,10 +32,12 @@ public class CadastraClienteValidator {
         if(Objects.isNull(dados.getEmail())
             || Objects.isNull(dados.getNome())
             || Objects.isNull(dados.getTelefone())
-            || Objects.isNull(dados.getSenha())){
+            || Objects.isNull(dados.getSenha())
+            || validaSenha(dados.getSenha())){
 
             throw new ParametroInvalidoException();
         }
+        
     }
 
     private void validaCampos(DadosClienteModelRequest dadosClienteModelRequest) {
@@ -55,12 +54,8 @@ public class CadastraClienteValidator {
     private void tipoClienteValid(DadosClienteModelRequest dadosClienteModelRequest) {
         if(dadosClienteModelRequest.getTipoCliente().equalsIgnoreCase(TipoClienteEnum.EMPRESA.getTipoCliente())){
             validaCamposEmpresa(dadosClienteModelRequest);
-            String senha = crp.criptografar(dadosClienteModelRequest.getSenha());
-            dadosClienteModelRequest.setSenha(senha);
         } else{
             validaCamposPessoa(dadosClienteModelRequest);
-            String senha = crp.criptografar(dadosClienteModelRequest.getSenha());
-            dadosClienteModelRequest.setSenha(senha);
         }
     }
 
@@ -72,12 +67,19 @@ public class CadastraClienteValidator {
 
     private void validaCamposEmpresa(DadosClienteModelRequest dadosClienteModelRequest) {
         if(validaCnpj(dadosClienteModelRequest.getCnpj()).equals(Boolean.FALSE)
-                || dadosClienteModelRequest.getNomeEmpresa().isEmpty()){
+                || dadosClienteModelRequest.getNomeEmpresa().isEmpty() || validaSenha(dadosClienteModelRequest.getSenha())){
             throw new ParametroInvalidoException();
         }
     }
 
-    private static Boolean validaCpf(String cpf){
+    private boolean validaSenha(String senha) {
+		if (senha.matches("^(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$)$")){
+			return false;
+		}
+		return true;
+	}
+
+	private static Boolean validaCpf(String cpf){
         // valida se o cpf é formado por uma sequencia de numeros iguais
         if (cpf.equals("00000000000") ||
                 cpf.equals("11111111111") ||
