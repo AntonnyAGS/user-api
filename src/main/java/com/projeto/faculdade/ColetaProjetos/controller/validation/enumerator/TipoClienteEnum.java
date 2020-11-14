@@ -11,8 +11,8 @@ import java.util.Optional;
  * @since 09/11/2020
  */
 public enum TipoClienteEnum {
-    PESSOA("pessoa"),
-    EMPRESA("empresa");
+    PESSOA("person"),
+    EMPRESA("company");
 
     private String tipoCliente;
 

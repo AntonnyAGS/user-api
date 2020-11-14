@@ -73,7 +73,7 @@ public class CadastraClienteValidator {
     }
 
     private boolean validaSenha(String senha) {
-		if (senha.matches("^(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$)$")){
+		if (senha.matches("^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Z\\d@$!%*#?&]{8,}$")){
 			return false;
 		}
 		return true;
