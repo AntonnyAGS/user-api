@@ -6,6 +6,7 @@ import com.projeto.faculdade.ColetaProjetos.controller.validation.CadastraClient
 import com.projeto.faculdade.ColetaProjetos.controller.validation.CadastraProjetoValidator;
 import com.projeto.faculdade.ColetaProjetos.model.ClienteModelRequest;
 import com.projeto.faculdade.ColetaProjetos.model.ProjetoModel;
+import com.projeto.faculdade.ColetaProjetos.model.ProjetoModelRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,10 @@ import com.projeto.faculdade.ColetaProjetos.services.interfaces.CadastraProjetoI
 
 /**
  * Classe responsável por capturar os dados de entrada
- * da aplicação para o cadastro do cliente
+ * da aplicação para o cadastro de projetos
  *
- * @code João Vitor
- * @since 09/11/2020
+ * @code Julio Henrique
+ * @since 11/11/2020
  */
 @RestController
 public class CadastraProjetoController {
@@ -34,16 +35,16 @@ public class CadastraProjetoController {
 	private CadastraProjetoValidator cadastraProjetoValidator;
 
 	/**
-	 * Método responsável por capturar requisições de cadastro de um cliente
+	 * Método responsável por capturar requisições de cadastro de um projeto
 	 *
-	 * @param clienteModelRequest
+	 * @param projetoModel
 	 * @return @code ResponseEntity<String> - retorno do método
 	 */
 	@PostMapping(value = "/cadastra_projeto", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<String> cadastraProjeto(@Valid @RequestBody(required = false) ProjetoModel projetoModel, MultipartFile photo, MultipartFile document) {
+	public ResponseEntity<String> cadastraProjeto(@Valid @RequestBody(required = false) ProjetoModelRequest projetoModel, MultipartFile photo, MultipartFile document) {
 
-//		cadastraClienteValidator.validaBodyEntrada(clienteModelRequest);
-//		clienteService.cadastrarCliente(clienteModelRequest);
+		cadastraProjetoValidator.validaBodyEntrada(projetoModel);
+		projetoService.cadastrarProjeto(projetoModel);
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
