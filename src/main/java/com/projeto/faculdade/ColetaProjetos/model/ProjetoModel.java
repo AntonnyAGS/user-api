@@ -1,7 +1,5 @@
 package com.projeto.faculdade.ColetaProjetos.model;
 
-import com.projeto.faculdade.ColetaProjetos.controller.validation.enumerator.TipoProjetoEnum;
-
 public class ProjetoModel {
 	
 	private String projectName;

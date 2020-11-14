@@ -30,10 +30,10 @@ public class CadastraClienteValidator {
 
     private void validaCamposUsuario(DadosClienteModelRequest dados) {
         if(Objects.isNull(dados.getEmail())
-            || Objects.isNull(dados.getNome())
-            || Objects.isNull(dados.getTelefone())
-            || Objects.isNull(dados.getSenha())
-            || validaSenha(dados.getSenha())){
+            || Objects.isNull(dados.getName())
+            || Objects.isNull(dados.getPhone())
+            || Objects.isNull(dados.getPassword())
+            || validaSenha(dados.getPassword())){
 
             throw new ParametroInvalidoException();
         }
@@ -42,7 +42,7 @@ public class CadastraClienteValidator {
 
     private void validaCampos(DadosClienteModelRequest dadosClienteModelRequest) {
 
-        Optional<String> tipoClienteEnum = TipoClienteEnum.validaTipoCliente(dadosClienteModelRequest.getTipoCliente());
+        Optional<String> tipoClienteEnum = TipoClienteEnum.validaTipoCliente(dadosClienteModelRequest.getCustomerType());
 
         if(tipoClienteEnum.isPresent()){
             tipoClienteValid(dadosClienteModelRequest);
@@ -52,7 +52,7 @@ public class CadastraClienteValidator {
     }
 
     private void tipoClienteValid(DadosClienteModelRequest dadosClienteModelRequest) {
-        if(dadosClienteModelRequest.getTipoCliente().equalsIgnoreCase(TipoClienteEnum.EMPRESA.getTipoCliente())){
+        if(dadosClienteModelRequest.getCustomerType().equalsIgnoreCase(TipoClienteEnum.EMPRESA.getTipoCliente())){
             validaCamposEmpresa(dadosClienteModelRequest);
         } else{
             validaCamposPessoa(dadosClienteModelRequest);
@@ -67,7 +67,7 @@ public class CadastraClienteValidator {
 
     private void validaCamposEmpresa(DadosClienteModelRequest dadosClienteModelRequest) {
         if(validaCnpj(dadosClienteModelRequest.getCnpj()).equals(Boolean.FALSE)
-                || dadosClienteModelRequest.getNomeEmpresa().isEmpty()){
+                || dadosClienteModelRequest.getCompanyName().isEmpty()){
             throw new ParametroInvalidoException();
         }
     }

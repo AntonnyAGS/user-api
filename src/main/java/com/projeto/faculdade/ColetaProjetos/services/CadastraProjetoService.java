@@ -2,6 +2,7 @@ package com.projeto.faculdade.ColetaProjetos.services;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -17,6 +18,7 @@ import com.projeto.faculdade.ColetaProjetos.services.interfaces.CadastraProjetoI
  * @author João Vitor
  * @since 09/11/2020
  */
+@Component
 public class CadastraProjetoService implements CadastraProjetoInterface {
 
     @Autowired

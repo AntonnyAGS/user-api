@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConnectionMongoDBConfig {
 
-    //@Value("${spring.data.mongodb.uri}")
-    private String mongoUri;
+//    @Value("${spring.data.mongodb.uri}")
+    private String mongoUri = "mongodb://";
 
     public MongoClient connectionMongoConfig(){
         return new MongoClient(new MongoClientURI(mongoUri));

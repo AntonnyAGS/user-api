@@ -1,9 +1,8 @@
 package com.projeto.faculdade.ColetaProjetos.services.interfaces;
 
-import com.projeto.faculdade.ColetaProjetos.model.ClienteModelRequest;
 import org.springframework.stereotype.Component;
 
-import com.projeto.faculdade.ColetaProjetos.model.ClienteModel;
+import com.projeto.faculdade.ColetaProjetos.model.ClienteModelRequest;
 
 /**
  * Classe responsável por conter o método

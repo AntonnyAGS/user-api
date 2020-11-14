@@ -3,10 +3,6 @@ package com.projeto.faculdade.ColetaProjetos.controller.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Classe de excecao responsável por simbolizar o erro de
  * requisicoes formadas incorretamente <b>400</b>

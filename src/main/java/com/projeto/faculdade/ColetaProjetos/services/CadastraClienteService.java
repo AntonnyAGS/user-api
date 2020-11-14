@@ -2,6 +2,7 @@ package com.projeto.faculdade.ColetaProjetos.services;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -18,21 +19,21 @@ import com.projeto.faculdade.ColetaProjetos.services.interfaces.CadastraClienteI
  * @author João Vitor
  * @since 09/11/2020
  */
+@Component
 public class CadastraClienteService implements CadastraClienteInterface {
 
     @Autowired
     private ConnectionMongoDBConfig connectionMongoDBConfig;
     
     @Autowired
-    private CriptografaDados crp;
+    private CriptografaDados criptografaDados;
 
     @Override
     public void cadastrarCliente(ClienteModelRequest clienteModelRequest) {
-    	crp = new CriptografaDados();
     	 
     	clienteModelRequest.getUsuario().forEach(usuario -> {
-    		String senha = crp.criptografar(usuario.getSenha());
-    		usuario.setSenha(senha);
+    		String senha = criptografaDados.criptografar(usuario.getPassword());
+    		usuario.setPassword(senha);
     	});
     	
         MongoClient mongoClient = connectionMongoDBConfig.connectionMongoConfig();

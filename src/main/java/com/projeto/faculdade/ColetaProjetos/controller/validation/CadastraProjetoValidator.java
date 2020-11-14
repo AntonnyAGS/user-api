@@ -3,12 +3,14 @@ package com.projeto.faculdade.ColetaProjetos.controller.validation;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.stereotype.Component;
+
 import com.projeto.faculdade.ColetaProjetos.controller.exception.ParametroInvalidoException;
 import com.projeto.faculdade.ColetaProjetos.model.DadosProjetoModelRequest;
 
 import com.projeto.faculdade.ColetaProjetos.model.ProjetoModelRequest;
 
-
+@Component
 public class CadastraProjetoValidator {
 	
 	public void validaBodyEntrada(ProjetoModelRequest projetoModel) {

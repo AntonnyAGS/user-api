@@ -1,8 +1,10 @@
 package com.projeto.faculdade.ColetaProjetos.controller.exception;
 
-import com.projeto.faculdade.ColetaProjetos.controller.exception.enumerator.ResponseHandlerExceptionEnum;
-import com.projeto.faculdade.ColetaProjetos.controller.exception.model.response.CampoMensagemErroModelResponse;
-import com.projeto.faculdade.ColetaProjetos.controller.exception.model.response.MensagemErroModelResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.MessageSourceResolvable;
@@ -14,16 +16,14 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import com.projeto.faculdade.ColetaProjetos.controller.exception.enumerator.ResponseHandlerExceptionEnum;
+import com.projeto.faculdade.ColetaProjetos.controller.exception.model.response.CampoMensagemErroModelResponse;
+import com.projeto.faculdade.ColetaProjetos.controller.exception.model.response.MensagemErroModelResponse;
 
 /**
  * Classe responsável por realizar o tratamento
@@ -32,7 +32,6 @@ import java.util.Objects;
  * @author João Vitor
  * @since 24/10/2020
  */
-@ControllerAdvice
 @RestController
 public class ExceptionHandlerException extends ResponseEntityExceptionHandler implements MessageSourceAware {
 
